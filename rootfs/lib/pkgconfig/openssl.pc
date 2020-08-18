@@ -1,0 +1,9 @@
+prefix=/media/mm/f019bb83-2870-44f4-a660-ff154efa1bee/linux_6ul/aaa/open_lib_v2/__install_arm_gcc4_4
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: OpenSSL
+Description: Secure Sockets Layer and cryptography libraries and tools
+Version: 1.0.2n
+Requires: libssl libcrypto

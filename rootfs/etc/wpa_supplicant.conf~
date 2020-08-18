@@ -1,0 +1,13 @@
+ctrl_interface_group=wheel  
+update_config=1  
+  
+network={  
+	ssid="111"  
+	scan_ssid=1  
+	psk="12345679"
+	proto=RSN  
+	key_mgmt=WPA-PSK  
+	pairwise=CCMP  
+	auth_alg=OPEN  
+}
+

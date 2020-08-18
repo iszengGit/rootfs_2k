@@ -1,0 +1,13 @@
+prefix=/media/mm/f019bb83-2870-44f4-a660-ff154efa1bee/linux_6ul/aaa/open_lib_v2/__install_arm_gcc4_4/
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+sharedlibdir=${libdir}
+includedir=${prefix}/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.11
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}

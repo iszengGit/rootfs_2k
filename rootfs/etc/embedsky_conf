@@ -1,0 +1,62 @@
+#!/bin/sh
+#Start ssh service
+echo "Start ssh service"
+chown root:root /var/empty/
+chmod 755 /var/empty/
+/usr/sbin/sshd
+
+#Start ftp service
+#echo "Start ftp service"
+#tcpsvd -vE 0.0.0.0 21 ftpd -wvS /opt/ftp &
+
+if grep -q "TQ335X_QT5.5" /proc/embedsky/board_info ;then
+	echo "board name = TQ335X_QT5.5"
+	insmod /lib/modules/335x/8723bu.ko
+elif grep -q "TQIMX6UL_QT5.5" /proc/embedsky/board_info ;then
+	echo "board name = TQIMX6UL_QT5.5"
+	cp /opt/PDA/configs/EmbedSky_6ul.ini /opt/PDA/configs/EmbedSky.ini
+	insmod /lib/modules/6ul/8723bu.ko
+else
+	echo "other board"
+fi
+
+#network config 
+#mode=0  #0----dhcp 1----static ip
+#net='eth0'
+#if [ $mode -eq 0 ];then
+#    udhcpc -i $net -b &
+#elif [ $mode -eq 1 ];then
+    #ifconfig $net down
+    #sleep 1
+    #echo "nameserver 8.8.8.8" > /etc/resolv.conf
+    #echo "nameserver 202.96.128.166" >> /etc/resolv.conf
+#    ifconfig $net 192.168.1.6
+#    route add default gw 192.168.1.2 
+#fi
+# tslib
+RES_TS='/dev/touchscreen0'
+CAP_TS='/dev/input/cap_ts'
+
+export TSLIB_TSEVENTTYPE=INPUT
+export TSLIB_CALIBFILE='/etc/pointercal'
+export TSLIB_FBDEVICE='/dev/fb0'
+export TSLIB_CONSOLEDEVICE='none'
+export TSLIB_CONFFILE=/etc/ts.conf
+export TSLIB_PLUGINDIR=/usr/lib/ts
+if [ -e $CAP_TS ];then
+    export TSLIB_TSDEVICE=$CAP_TS
+    rm $TSLIB_CALIBFILE > /dev/null
+elif  [ -e $RES_TS ];then
+    export TSLIB_TSDEVICE=$RES_TS
+fi
+
+export DISPLAY=:0.0 
+export QT_PLUGIN_PATH=/usr/plugins
+export QT_QPA_PLATFORM=linuxfb
+export QT_QPA_FONTDIR=/usr/lib/fonts
+export QT_QPA_GENERIC_PLUGINS=tslib:/dev/touchscreen0
+
+
+#autostart progrom
+/opt/PDA/bin/tqpda &
+#/opt/tqPainter &

@@ -1,0 +1,20 @@
+# Create symlinks for i.mx keypads and touchscreens
+SUBSYSTEM=="input" KERNEL=="event*" ATTRS{name}=="mxckpd",     SYMLINK+="input/keyboard0"
+SUBSYSTEM=="input" KERNEL=="event*" ATTRS{name}=="Capacitance_ts",SYMLINK+="input/cap_ts"
+#SUBSYSTEM=="input" KERNEL=="event*" ATTRS{name}=="Resistive_ts",SYMLINK+="input/res_ts"
+SUBSYSTEM=="input" KERNEL=="event*" ATTRS{name}=="Resistive_ts" ,ACTION=="add" RUN+="/etc/udev/scripts/touch.sh"
+
+#mouse
+#KERNEL=="mouse*", NAME="input/%k", MODE:="0660", GROUP:="input",RUN+="/etc/udev/scripts/envset.sh"
+#KERNEL=="mice*", NAME="input/%k", MODE:="0660", GROUP:="input",RUN+="/etc/udev/scripts/envset.sh"
+#sound 
+SUBSYSTEM=="sound",,ATTRS{id}=="wm8960audio", ACTION=="add",RUN+="/usr/sbin/alsactl restore -f /var/lib/alsa/asound.state"
+
+# The long class name gets cut off to be mc13783_connectiv in 
+# /sys/class/mc13783_connectivity/mc13783_connectivit
+KERNEL=="mc13783_connectiv*",  NAME="mc13783_connectivity"
+# Anyone has readonly permission to IIM device file
+SUBSYSTEM=="video", MODE="0660"
+KERNEL=="fb[0-9]",  MODE="0660", GROUP="video"
+KERNEL=="gsl_kmod", MODE="0660", GROUP="video"
+KERNEL=="galcore",  MODE="0660", GROUP="video"

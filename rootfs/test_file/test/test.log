@@ -1,0 +1,10 @@
+===============START TEST SPI=================
+/dev/spidev1.0 is fail!!!
+===============END TEST SPI=================
+===============START TEST I2C=================
+===============START TEST CAN=================
+read err
+can0 to can1 faile
+read err
+can1 to can0 faile
+===============END TEST CAN=================

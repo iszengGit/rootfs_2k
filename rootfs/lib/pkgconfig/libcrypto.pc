@@ -1,0 +1,13 @@
+prefix=/media/mm/f019bb83-2870-44f4-a660-ff154efa1bee/linux_6ul/aaa/open_lib_v2/__install_arm_gcc4_4
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+enginesdir=${libdir}/engines
+
+Name: OpenSSL-libcrypto
+Description: OpenSSL cryptography library
+Version: 1.0.2n
+Requires: 
+Libs: -L${libdir} -lcrypto
+Libs.private: -ldl
+Cflags: -I${includedir} 
