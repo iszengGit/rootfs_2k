@@ -1,0 +1,14 @@
+#!/bin/sh
+/bin/hostname -F /xprod/default/hostname
+
+# prepare for boa
+mkdir -m 755 -p /tmp/boa
+mkdir -m 755 -p /tmp/boa_cache
+touch /tmp/boa/result.html
+/bin/chmod 755 /tmp/boa/result.html
+
+if [ ! -f '/xprod/conf/pduc.conf' ]; then
+	cp /xprod/default/pduc.conf /xprod/conf/
+fi
+
+/xprod/app/pduc &
