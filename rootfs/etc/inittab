@@ -31,6 +31,8 @@
 # Stuff to do for the 3-finger salute
 #::ctrlaltdel:/sbin/reboot
 
+::once:/usr/sbin/telnetd -l /bin/login
+
 # Stuff to do before rebooting
 ::shutdown:/etc/init.d/rcK
 ::shutdown:/sbin/swapoff -a
