@@ -1,6 +1,6 @@
 #!/bin/sh
 
-
+hwclock -s
 
 # network config
 /sbin/net_set &
