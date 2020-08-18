@@ -2,9 +2,14 @@
 
 hwclock -s
 
-# network config
+### network config
 /sbin/net_set &
 
 
-#hostname
-/bin/hostname -F /etc/hostname
+### hostname
+/bin/hostname xprod
+
+### start applications and services
+/usr/bin/xupgrade
+/usr/bin/xdrivers
+/usr/bin/xprod
