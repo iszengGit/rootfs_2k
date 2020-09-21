@@ -12,14 +12,12 @@ export PAGER='/bin/more '
 export EDITOR='/bin/vi'
 
 # Source configuration files from /etc/profile.d
-if [ ! -e /dev/pts/* ]; then
-        for i in /etc/profile.d/*.sh ; do
-                if [ -r "$i" ]; then
-                        . $i
-                fi
-                unset i
-        done
-fi
+for i in /etc/profile.d/*.sh ; do
+    if [ -r "$i" ]; then
+        . $i
+    fi
+    unset i
+done
 
 #hostname
 HOSTNAM='/bin/hostname`'
