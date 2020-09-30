@@ -6,7 +6,7 @@ hwclock -s
 ifconfig lo 127.0.0.1
 /sbin/net_set &
 if [ ! -e /usr/sbin/inetd ]; then
-        busybox --install
+	busybox --install
 fi
 /usr/sbin/inetd &
 
